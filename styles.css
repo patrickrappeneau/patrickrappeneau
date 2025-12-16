@@ -65,17 +65,14 @@ header .logo{font-size:1.5rem;font-weight:700;color:white}
 .contact-form textarea{min-height:140px;resize:vertical}
 .contact-form button{background:var(--choco-700);color:var(--cream-200);border:none;padding:0.7rem 1rem;border-radius:8px;cursor:pointer;font-weight:700}
 
-/* Responsive nav (burger) */
+/* Navigation */
 .nav{position:relative}
-.nav-toggle{display:none;background:transparent;border:2px solid rgba(255,255,255,0.12);color:white;padding:0.4rem 0.6rem;border-radius:6px;font-size:1.1rem;cursor:pointer}
-.nav-list{display:flex;gap:1rem;align-items:center}
+.nav-list{display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
 .nav-list li{list-style:none}
 .nav-list a{color:white;text-decoration:none;padding:0.25rem 0.5rem}
 .nav-list a.active{background:var(--choco-700);color:var(--cream-200);border-radius:6px}
 
 @media (max-width: 820px){
-    .nav-toggle{display:block}
-    .nav-list{position:absolute;top:100%;right:1rem;background:var(--cream-200);color:var(--choco-900);flex-direction:column;padding:0.7rem;border-radius:8px;box-shadow:0 8px 30px rgba(43,31,23,0.12);display:none;z-index:999}
-    .nav-list.open{display:flex}
-    .nav-list a{color:var(--choco-900)}
+    .nav-list{flex-direction:row;justify-content:center;gap:0.6rem;padding:0.5rem 0}
+    .nav-list a{color:white}
 }
