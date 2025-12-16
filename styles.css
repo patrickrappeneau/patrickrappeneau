@@ -45,3 +45,37 @@ footer{background:var(--choco-900);color:var(--cream-200);text-align:center;padd
 
 /* Header/logo refinements */
 header .logo{font-size:1.5rem;font-weight:700;color:white}
+
+/* About / Contact layout */
+.about-hero{padding:3rem 1rem;background:linear-gradient(180deg,var(--cream-200) 0%, #fff 100%);text-align:center}
+.artist{display:grid;grid-template-columns:1fr;gap:1.25rem;max-width:1000px;margin:1.5rem auto;padding:0 1rem}
+.artist .photo{border-radius:10px;overflow:hidden}
+.artist .photo img{width:100%;height:100%;object-fit:cover;display:block}
+.artist .bio{padding:1rem;background:linear-gradient(180deg,#fff 0%,var(--cream-200) 100%);border-radius:10px}
+
+@media(min-width:800px){
+    .artist{grid-template-columns:340px 1fr;align-items:start}
+}
+
+/* Contact form */
+.contact-section{max-width:720px;margin:2rem auto;padding:0 1rem}
+.contact-form{background:linear-gradient(180deg,#fff 0%,var(--cream-200) 100%);padding:1.2rem;border-radius:10px;box-shadow:0 6px 18px rgba(43,31,23,0.06)}
+.contact-form label{display:block;margin-bottom:0.35rem;color:var(--text);font-weight:600}
+.contact-form input,.contact-form textarea{width:100%;padding:0.65rem;border:1px solid #dfd3cc;border-radius:8px;margin-bottom:0.85rem}
+.contact-form textarea{min-height:140px;resize:vertical}
+.contact-form button{background:var(--choco-700);color:var(--cream-200);border:none;padding:0.7rem 1rem;border-radius:8px;cursor:pointer;font-weight:700}
+
+/* Responsive nav (burger) */
+.nav{position:relative}
+.nav-toggle{display:none;background:transparent;border:2px solid rgba(255,255,255,0.12);color:white;padding:0.4rem 0.6rem;border-radius:6px;font-size:1.1rem;cursor:pointer}
+.nav-list{display:flex;gap:1rem;align-items:center}
+.nav-list li{list-style:none}
+.nav-list a{color:white;text-decoration:none;padding:0.25rem 0.5rem}
+.nav-list a.active{background:var(--choco-700);color:var(--cream-200);border-radius:6px}
+
+@media (max-width: 820px){
+    .nav-toggle{display:block}
+    .nav-list{position:absolute;top:64px;right:1rem;background:var(--cream-200);color:var(--choco-900);flex-direction:column;padding:0.7rem;border-radius:8px;box-shadow:0 8px 30px rgba(43,31,23,0.12);display:none}
+    .nav-list.open{display:flex}
+    .nav-list a{color:var(--choco-900)}
+}

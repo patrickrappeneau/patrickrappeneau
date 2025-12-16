@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Galerie d'Art</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="nav">
+            <div class="logo">Galerie d'Art</div>
+            <button class="nav-toggle" aria-label="Ouvrir le menu">☰</button>
+            <ul class="nav-list">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="galerie.html">Galerie</a></li>
+                <li><a href="about.html">À propos</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="contact-section">
+        <h1 style="text-align:center;color:var(--choco-900)">Contact</h1>
+        <p style="text-align:center;max-width:800px;margin:0.5rem auto;color:#6b5246">Remplissez le formulaire ci-dessous pour joindre l'artiste. Nous répondrons sous 48 heures.</p>
+
+        <div class="contact-form" style="margin-top:1rem">
+            <form action="#" method="post">
+                <label for="name">Nom</label>
+                <input id="name" name="name" type="text" required>
+
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" required>
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message" required></textarea>
+
+                <button type="submit">Envoyer</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <p style="text-align:center">&copy; 2025 Galerie d'Art. Tous droits réservés.</p>
+    </footer>
+    <script src="main.js"></script>
+</body>
+</html>

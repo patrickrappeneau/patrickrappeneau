@@ -25,12 +25,14 @@
 </head>
 <body>
     <header>
-        <nav>
+        <nav class="nav">
             <div class="logo">Galerie d'Art</div>
-            <ul>
+            <button class="nav-toggle" aria-label="Ouvrir le menu">☰</button>
+            <ul class="nav-list">
                 <li><a href="index.html">Accueil</a></li>
                 <li><a href="galerie.html">Galerie</a></li>
                 <li><a href="about.html">À propos</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -103,7 +105,7 @@
     <footer>
         <p>&copy; 2025 Galerie d'Art. Tous droits réservés.</p>
     </footer>
-
+    <script src="main.js"></script>
     <script>
         // Simple filter by data-gallery
         const filters = document.getElementById('filters');
