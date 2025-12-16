@@ -1,0 +1,47 @@
+:root{
+    --choco-900: #3B2F2F;
+    --choco-800: #4E2A1E;
+    --choco-700: #6B3F2B;
+    --choco-500: #8B5E3C;
+    --cream-200: #EDE3DB;
+    --accent: #D9B99B;
+    --text: #2b1f17;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;color:var(--text);background:var(--cream-200);line-height:1.6}
+
+header{background:linear-gradient(135deg,var(--choco-800) 0%,var(--choco-500) 100%);color:white;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center}
+
+header h1{font-size:1.4rem}
+
+nav ul{list-style:none;display:flex;gap:1rem}
+nav a{color:white;text-decoration:none;font-weight:600}
+
+.hero{background:linear-gradient(135deg,var(--choco-800) 0%,var(--choco-500) 100%);color:white;padding:5rem 2rem;text-align:center}
+.hero h2{font-size:2rem;margin-bottom:0.6rem}
+.hero p{margin-bottom:1rem}
+
+.btn{display:inline-block;background:var(--accent);color:var(--choco-900);padding:0.7rem 1.6rem;border-radius:6px;text-decoration:none;font-weight:700}
+
+footer{background:var(--choco-900);color:var(--cream-200);text-align:center;padding:1.2rem;margin-top:2rem}
+
+/* Utilities */
+.container{max-width:1200px;margin:0 auto;padding:0 1rem}
+
+/* Carousel styles (used by accueil.html) */
+.carousel{max-width:1200px;margin:3rem auto;padding:0 2rem}
+.carousel-container{position:relative;overflow:hidden;border-radius:10px;box-shadow:0 4px 6px rgba(0,0,0,0.12)}
+.carousel-inner{display:flex;transition:transform 0.5s ease-in-out}
+.carousel-item{min-width:100%;height:400px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--choco-800) 0%,var(--choco-500) 100%);color:white;font-size:2rem;font-weight:700}
+.carousel-control{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,0.35);color:white;border:none;padding:0.8rem 1.1rem;cursor:pointer;font-size:1.5rem;transition:background 0.25s}
+.carousel-control:hover{background:rgba(0,0,0,0.6)}
+.carousel-control.prev{left:0}
+.carousel-control.next{right:0}
+.carousel-indicators{text-align:center;padding:1rem}
+.indicator{height:12px;width:12px;margin:0 5px;background-color:#bbb;border-radius:50%;display:inline-block;cursor:pointer;transition:background-color 0.3s}
+.indicator.active{background-color:var(--accent)}
+
+/* Header/logo refinements */
+header .logo{font-size:1.5rem;font-weight:700;color:white}

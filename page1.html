@@ -5,84 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root{
+            --choco-900: #3B2F2F;
+            --choco-800: #4E2A1E;
+            --choco-700: #6B3F2B;
+            --choco-500: #8B5E3C;
+            --cream-200: #EDE3DB;
+            --accent: #D9B99B;
+            --text: #2b1f17;
         }
-        
-        body {
+
+        *{margin:0;padding:0;box-sizing:border-box}
+
+        body{
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #333;
-            line-height: 1.6;
+            color: var(--text);
+            line-height:1.6;
+            background: var(--cream-200);
         }
-        
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+        header{
+            background: linear-gradient(135deg, var(--choco-800) 0%, var(--choco-500) 100%);
             color: white;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding:1rem 2rem;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
         }
-        
-        nav a {
+
+        nav a{color: white;text-decoration:none;margin:0 1.5rem;font-weight:600}
+
+        .hero{
+            background: linear-gradient(135deg, var(--choco-800) 0%, var(--choco-500) 100%);
             color: white;
-            text-decoration: none;
-            margin: 0 1.5rem;
-            font-weight: 500;
+            text-align:center;
+            padding:6rem 2rem;
         }
-        
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
-            padding: 8rem 2rem;
-        }
-        
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .btn {
-            display: inline-block;
-            background: white;
-            color: #667eea;
-            padding: 0.8rem 2rem;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 4rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .feature {
-            padding: 2rem;
-            background: #f5f5f5;
-            border-radius: 8px;
-            text-align: center;
-        }
-        
-        footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 2rem;
-        }
+
+        .hero h1{font-size:3rem;margin-bottom:1rem}
+        .hero p{font-size:1.15rem;margin-bottom:1.8rem}
+
+        .btn{display:inline-block;background:var(--accent);color:var(--choco-900);padding:0.8rem 1.8rem;border-radius:6px;text-decoration:none;font-weight:700;cursor:pointer}
+
+        .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;padding:3.5rem 2rem;max-width:1200px;margin:0 auto}
+
+        .feature{padding:1.6rem;background:linear-gradient(180deg, #f7efe6 0%, var(--cream-200) 100%);border-radius:10px;text-align:center;color:var(--text);box-shadow:0 2px 8px rgba(0,0,0,0.06)}
+
+        footer{background:var(--choco-900);color:var(--cream-200);text-align:center;padding:1.6rem}
     </style>
 </head>
 <body>
