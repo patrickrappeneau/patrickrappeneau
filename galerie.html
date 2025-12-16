@@ -18,6 +18,11 @@
         .art-card .meta h4{margin-bottom:0.25rem;font-size:1.05rem}
         .art-card .meta p{margin:0;font-size:0.9rem;color:#6b5246}
 
+        .card-actions{display:flex;gap:0.5rem;padding:0.75rem 1rem;border-top:1px solid rgba(0,0,0,0.04);margin-top:auto}
+        .card-actions button,.card-actions a{flex:1;padding:0.55rem 0.6rem;border-radius:8px;border:2px solid var(--choco-900);background:transparent;color:var(--choco-900);font-weight:600;text-align:center;cursor:pointer;text-decoration:none}
+        .card-actions .info-btn{background:var(--choco-700);color:var(--cream-200);border-color:transparent}
+        .card-actions .contact-btn{background:transparent}
+
         @media (min-width:900px){
             .art-card img{height:180px}
         }
@@ -27,6 +32,9 @@
         .lightbox.open{opacity:1;pointer-events:auto}
         .lightbox img{max-width:100%;max-height:100vh;object-fit:contain;display:block}
         .lightbox-close{position:fixed;top:12px;right:12px;background:transparent;border:2px solid var(--choco-900);color:var(--choco-900);width:40px;height:40px;border-radius:50%;font-size:1.1rem;cursor:pointer;z-index:1001}
+        .lightbox-meta{max-width:90%;margin-top:1rem;text-align:center;color:var(--choco-900);padding:0.5rem 1rem}
+        .lightbox-meta h3{margin:0;font-size:1.2rem}
+        .lightbox-meta p{margin:0.25rem 0;color:#6b5246;font-size:0.95rem}
     </style>
 </head>
 <body>
@@ -56,51 +64,75 @@
 
             <div class="gallery-grid" id="galleryGrid">
                 <!-- Sample artwork cards (replace src with real images) -->
-                <article class="art-card" data-gallery="Moderne">
+                <article class="art-card" data-gallery="Moderne" data-title="Tableau 1" data-artist="Artiste A" data-creation="2022" data-collection="Moderne">
                     <img src="https://placehold.co/600x400/8B5E3C/D9B99B.png?text=Tableau+1" alt="Tableau 1">
                     <div class="meta">
                         <h4>Tableau 1</h4>
-                        <p>Artiste A — Moderne — 2022</p>
+                        <p></p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="info-btn" type="button"></button>
+                        <a class="contact-btn" href="#">Contact</a>
                     </div>
                 </article>
 
-                <article class="art-card" data-gallery="Classique">
+                <article class="art-card" data-gallery="Classique" data-title="Tableau 2" data-artist="Artiste B" data-creation="1890" data-collection="Classique">
                     <img src="https://placehold.co/600x400/6B3F2B/EDE3DB.png?text=Tableau+2" alt="Tableau 2">
                     <div class="meta">
                         <h4>Tableau 2</h4>
-                        <p>Artiste B — Classique — 1890</p>
+                        <p></p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="info-btn" type="button"></button>
+                        <a class="contact-btn" href="#">Contact</a>
                     </div>
                 </article>
 
-                <article class="art-card" data-gallery="Abstrait">
+                <article class="art-card" data-gallery="Abstrait" data-title="Tableau 3" data-artist="Artiste C" data-creation="2018" data-collection="Abstrait">
                     <img src="https://placehold.co/600x400/4E2A1E/D9B99B.png?text=Tableau+3" alt="Tableau 3">
                     <div class="meta">
                         <h4>Tableau 3</h4>
-                        <p>Artiste C — Abstrait — 2018</p>
+                        <p></p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="info-btn" type="button"></button>
+                        <a class="contact-btn" href="#">Contact</a>
                     </div>
                 </article>
 
-                <article class="art-card" data-gallery="Paysage">
+                <article class="art-card" data-gallery="Paysage" data-title="Tableau 4" data-artist="Artiste D" data-creation="1995" data-collection="Paysage">
                     <img src="https://placehold.co/600x400/3B2F2F/EDE3DB.png?text=Tableau+4" alt="Tableau 4">
                     <div class="meta">
                         <h4>Tableau 4</h4>
-                        <p>Artiste D — Paysage — 1995</p>
+                        <p></p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="info-btn" type="button"></button>
+                        <a class="contact-btn" href="#">Contact</a>
                     </div>
                 </article>
 
-                <article class="art-card" data-gallery="Moderne">
+                <article class="art-card" data-gallery="Moderne" data-title="Tableau 5" data-artist="Artiste E" data-creation="2021" data-collection="Moderne">
                     <img src="https://placehold.co/600x400/8B5E3C/D9B99B.png?text=Tableau+5" alt="Tableau 5">
                     <div class="meta">
                         <h4>Tableau 5</h4>
-                        <p>Artiste E — Moderne — 2021</p>
+                        <p></p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="info-btn" type="button"></button>
+                        <a class="contact-btn" href="#">Contact</a>
                     </div>
                 </article>
 
-                <article class="art-card" data-gallery="Classique">
+                <article class="art-card" data-gallery="Classique" data-title="Tableau 6" data-artist="Artiste F" data-creation="1870" data-collection="Classique">
                     <img src="https://placehold.co/600x400/6B3F2B/EDE3DB.png?text=Tableau+6" alt="Tableau 6">
                     <div class="meta">
                         <h4>Tableau 6</h4>
-                        <p>Artiste F — Classique — 1870</p>
+                        <p></p>
+                    </div>
+                    <div class="card-actions">
+                        <button class="info-btn" type="button"></button>
+                        <a class="contact-btn" href="#">Contact</a>
                     </div>
                 </article>
             </div>
@@ -111,6 +143,15 @@
     <div id="lightbox" class="lightbox" aria-hidden="true">
         <button id="lightbox-close" class="lightbox-close" aria-label="Fermer">✕</button>
         <img id="lightbox-img" src="" alt="" />
+        <div class="lightbox-meta" id="lightbox-meta" aria-hidden="true">
+            <h3 id="lb-title"></h3>
+            <p id="lb-artist"></p>
+            <p id="lb-creation"></p>
+            <p id="lb-collection"></p>
+            <div style="margin-top:.6rem">
+                <button id="lb-view-collection" style="padding:.5rem .8rem;border-radius:8px;border:2px solid var(--choco-900);background:transparent;color:var(--choco-900);cursor:pointer">Voir la collection</button>
+            </div>
+        </div>
     </div>
 
     <footer>
@@ -140,13 +181,42 @@
         });
 
         // Lightbox behavior
-        (function(){
+            (function(){
             const lightbox = document.getElementById('lightbox');
             const lbImg = document.getElementById('lightbox-img');
             const lbClose = document.getElementById('lightbox-close');
+            const lbMeta = document.getElementById('lightbox-meta');
+            const lbTitle = document.getElementById('lb-title');
+            const lbArtist = document.getElementById('lb-artist');
+            const lbCreation = document.getElementById('lb-creation');
+            const lbCollection = document.getElementById('lb-collection');
 
-            function openLightbox(src){
+            let currentOpenCard = null;
+
+            function openLightbox(src, card){
+                currentOpenCard = card || null;
                 lbImg.src = src;
+                // populate metadata if provided
+                if(card){
+                    const title = card.dataset.title || '';
+                    const artist = card.dataset.artist || '';
+                    const creation = card.dataset.creation || '';
+                    const collection = card.dataset.collection || '';
+                    lbTitle.textContent = title;
+                    lbArtist.textContent = artist ? ('Artiste: ' + artist) : '';
+                    lbCreation.textContent = creation ? ('Création: ' + creation) : '';
+                    lbCollection.textContent = collection ? ('Collection: ' + collection) : '';
+                    lbMeta.style.display = (title || artist || creation || collection) ? 'block' : 'none';
+                    lbMeta.setAttribute('aria-hidden', lbMeta.style.display === 'none' ? 'true' : 'false');
+                } else {
+                    lbMeta.style.display = 'none';
+                    lbMeta.setAttribute('aria-hidden','true');
+                    lbTitle.textContent = '';
+                    lbArtist.textContent = '';
+                    lbCreation.textContent = '';
+                    lbCollection.textContent = '';
+                }
+
                 lightbox.classList.add('open');
                 lightbox.setAttribute('aria-hidden','false');
             }
@@ -155,6 +225,12 @@
                 lightbox.classList.remove('open');
                 lightbox.setAttribute('aria-hidden','true');
                 lbImg.src = '';
+                lbMeta.style.display = 'none';
+                lbMeta.setAttribute('aria-hidden','true');
+                lbTitle.textContent = '';
+                lbArtist.textContent = '';
+                lbCreation.textContent = '';
+                lbCollection.textContent = '';
             }
 
             document.querySelectorAll('.art-card img').forEach(imgEl=>{
@@ -164,10 +240,58 @@
                     if(lightbox.classList.contains('open') && lbImg.src === full){
                         closeLightbox();
                     } else {
-                        openLightbox(full);
+                        openLightbox(full, card);
                     }
                 });
             });
+
+            // Wire 'Plus d'info' buttons (keep metadata hidden in gallery; show only in lightbox)
+            document.querySelectorAll('.info-btn').forEach(btn=>{
+                const card = btn.closest('.art-card');
+                btn.textContent = "Plus d'info";
+                btn.addEventListener('click',(e)=>{
+                    const imgEl = card.querySelector('img');
+                    const full = card.getAttribute('data-full') || imgEl.src;
+                    if(lightbox.classList.contains('open') && lbImg.src === full){
+                        closeLightbox();
+                    } else {
+                        openLightbox(full, card);
+                    }
+                });
+            });
+
+            // Populate contact links with the artwork title
+            document.querySelectorAll('.contact-btn').forEach(a=>{
+                const card = a.closest('.art-card');
+                const titleEl = card.querySelector('.meta h4');
+                const title = titleEl ? titleEl.textContent.trim() : 'Tableau';
+                a.href = 'contact.html?art=' + encodeURIComponent(title);
+            });
+
+            // 'Voir la collection' button behaviour
+            const lbViewCollection = document.getElementById('lb-view-collection');
+            function applyFilter(name){
+                const btns = filters.querySelectorAll('button');
+                btns.forEach(b=> b.classList.toggle('active', b.getAttribute('data-filter') === name));
+                cards.forEach(card => {
+                    const gallery = card.getAttribute('data-gallery');
+                    if (name === 'all' || gallery === name) {
+                        card.style.display = '';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+            if(lbViewCollection){
+                lbViewCollection.addEventListener('click', ()=>{
+                    if(!currentOpenCard) return;
+                    const collection = currentOpenCard.dataset.collection || currentOpenCard.getAttribute('data-gallery') || '';
+                    closeLightbox();
+                    if(collection){
+                        applyFilter(collection);
+                    }
+                });
+            }
 
             lbClose.addEventListener('click', closeLightbox);
             lbImg.addEventListener('click', closeLightbox);
