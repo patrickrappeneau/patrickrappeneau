@@ -120,6 +120,21 @@
                     }
                     ensureLightboxExists();
 
+                    // Format creation date as "Mois Année" in French (e.g. "décembre 2025")
+                    function formatCreation(dateStr){
+                        if(!dateStr) return '';
+                        try{
+                            const d = new Date(dateStr);
+                            if(isNaN(d)) return dateStr;
+                            // short month (ex: "déc.") then remove dot and capitalize first letter => "Déc 2025"
+                            let s = new Intl.DateTimeFormat('fr-FR', { month: 'short', year: 'numeric' }).format(d);
+                            s = s.replace(/\./g,'');
+                            return s.charAt(0).toUpperCase() + s.slice(1);
+                        }catch(e){
+                            return dateStr;
+                        }
+                    }
+
                     // Try to load canonical data first, fallback to images/index.json
                     async function fetchImagesData(){
                         let images = [];
@@ -304,18 +319,18 @@
                             if(lbControls){ lbControls.style.display = 'flex'; lbControls.setAttribute('aria-hidden','false'); }
                             if(lbTitleInline) lbTitleInline.textContent = (card && card.dataset.title) ? card.dataset.title : '';
                             if(lbDetailArtist) lbDetailArtist.textContent = (card && card.dataset.artist) ? ('Artiste: ' + card.dataset.artist) : '';
-                            if(lbDetailCreation) lbDetailCreation.textContent = (card && card.dataset.creation) ? ('Création: ' + card.dataset.creation) : '';
+                            if(lbDetailCreation) lbDetailCreation.textContent = (card && card.dataset.creation) ? ('Création: ' + formatCreation(card.dataset.creation)) : '';
                             if(lbDetailCollection) lbDetailCollection.textContent = (card && card.dataset.collection) ? ('Collection: ' + card.dataset.collection) : '';
                             if(lbContactInline){ const t = (card && card.dataset.title) ? card.dataset.title : ''; lbContactInline.href = 'contact.html?art=' + encodeURIComponent(t); }
 
-                            if(card){
+                                if(card){
                                 const title = card.dataset.title || '';
                                 const artist = card.dataset.artist || '';
                                 const creation = card.dataset.creation || '';
                                 const collection = card.dataset.collection || '';
                                 lbTitle.textContent = title;
                                 lbArtist.textContent = artist ? ('Artiste: ' + artist) : '';
-                                lbCreation.textContent = creation ? ('Création: ' + creation) : '';
+                                lbCreation.textContent = creation ? ('Création: ' + formatCreation(creation)) : '';
                                 lbCollection.textContent = collection ? ('Collection: ' + collection) : '';
                                 lbMeta.style.display = (title || artist || creation || collection) ? 'block' : 'none';
                                 lbMeta.setAttribute('aria-hidden', lbMeta.style.display === 'none' ? 'true' : 'false');
@@ -340,7 +355,7 @@
                                 const collection = card.dataset.collection || '';
                                 lbTitle.textContent = title;
                                 lbArtist.textContent = artist ? ('Artiste: ' + artist) : '';
-                                lbCreation.textContent = creation ? ('Création: ' + creation) : '';
+                                lbCreation.textContent = creation ? ('Création: ' + formatCreation(creation)) : '';
                                 lbCollection.textContent = collection ? ('Collection: ' + collection) : '';
                                 lbMeta.style.display = (title || artist || creation || collection) ? 'block' : 'none';
                                 lbMeta.setAttribute('aria-hidden', lbMeta.style.display === 'none' ? 'true' : 'false');
