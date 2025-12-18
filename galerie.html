@@ -28,13 +28,18 @@
         }
 
         /* Lightbox full-screen */
-        .lightbox{position:fixed;inset:0;background:var(--cream-200);display:flex;align-items:center;justify-content:center;padding:0;opacity:0;pointer-events:none;transition:opacity 0.18s}
+        .lightbox{position:fixed;inset:0;background:var(--cream-200);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.25rem;gap:1rem;opacity:0;pointer-events:none;transition:opacity 0.18s}
         .lightbox.open{opacity:1;pointer-events:auto}
-        .lightbox img{max-width:100%;max-height:100vh;object-fit:contain;display:block}
+        .lightbox img{max-width:90%;max-height:80vh;object-fit:contain;display:block}
         .lightbox-close{position:fixed;top:12px;right:12px;background:transparent;border:2px solid var(--choco-900);color:var(--choco-900);width:40px;height:40px;border-radius:50%;font-size:1.1rem;cursor:pointer;z-index:1001}
         .lightbox-meta{max-width:90%;margin-top:1rem;text-align:center;color:var(--choco-900);padding:0.5rem 1rem}
         .lightbox-meta h3{margin:0;font-size:1.2rem}
         .lightbox-meta p{margin:0.25rem 0;color:#6b5246;font-size:0.95rem}
+        .lightbox-controls{max-width:90%;margin-top:1rem;text-align:center;display:none;flex-direction:column;align-items:center;gap:0.6rem}
+        .lightbox-controls h3{margin:0;font-size:1.2rem;color:var(--choco-900)}
+        #lb-detail p{margin:0.25rem 0;color:#6b5246;font-size:0.95rem}
+        .lightbox-controls .lb-btns{display:flex;gap:0.6rem;justify-content:center;margin-top:.5rem}
+        .lightbox-controls .lb-btns a{padding:.45rem .7rem;border-radius:8px;border:2px solid var(--choco-900);background:transparent;color:var(--choco-900);cursor:pointer;text-decoration:none;font-weight:600}
     </style>
 </head>
 <body>
@@ -143,6 +148,19 @@
     <div id="lightbox" class="lightbox" aria-hidden="true">
         <button id="lightbox-close" class="lightbox-close" aria-label="Fermer">✕</button>
         <img id="lightbox-img" src="" alt="" />
+        <div id="lightbox-controls" class="lightbox-controls" aria-hidden="true">
+            <div>
+                <h3 id="lb-title-inline"></h3>
+                <div id="lb-detail" style="margin-top:.5rem">
+                    <p id="lb-detail-artist"></p>
+                    <p id="lb-detail-creation"></p>
+                    <p id="lb-detail-collection"></p>
+                </div>
+                <div class="lb-btns" style="margin-top:.6rem">
+                    <a id="lb-contact-inline" class="contact-inline" href="#">Contact</a>
+                </div>
+            </div>
+        </div>
         <div class="lightbox-meta" id="lightbox-meta" aria-hidden="true">
             <h3 id="lb-title"></h3>
             <p id="lb-artist"></p>
@@ -195,7 +213,22 @@
 
             function openLightbox(src, card){
                 currentOpenCard = card || null;
+                // ensure image is visible for image-mode
+                lbImg.style.display = '';
                 lbImg.src = src;
+                // show inline controls (title + detail + contact) and hide meta-only panel
+                const lbControls = document.getElementById('lightbox-controls');
+                const lbTitleInline = document.getElementById('lb-title-inline');
+                const lbDetailArtist = document.getElementById('lb-detail-artist');
+                const lbDetailCreation = document.getElementById('lb-detail-creation');
+                const lbDetailCollection = document.getElementById('lb-detail-collection');
+                const lbContactInline = document.getElementById('lb-contact-inline');
+                if(lbControls){ lbControls.style.display = 'flex'; lbControls.setAttribute('aria-hidden','false'); }
+                if(lbTitleInline) lbTitleInline.textContent = (card && card.dataset.title) ? card.dataset.title : '';
+                if(lbDetailArtist) lbDetailArtist.textContent = (card && card.dataset.artist) ? ('Artiste: ' + card.dataset.artist) : '';
+                if(lbDetailCreation) lbDetailCreation.textContent = (card && card.dataset.creation) ? ('Création: ' + card.dataset.creation) : '';
+                if(lbDetailCollection) lbDetailCollection.textContent = (card && card.dataset.collection) ? ('Collection: ' + card.dataset.collection) : '';
+                if(lbContactInline){ const t = (card && card.dataset.title) ? card.dataset.title : ''; lbContactInline.href = 'contact.html?art=' + encodeURIComponent(t); }
                 // populate metadata if provided
                 if(card){
                     const title = card.dataset.title || '';
@@ -217,6 +250,33 @@
                     lbCollection.textContent = '';
                 }
 
+                // hide meta-only panel when in image mode (we use inline detail instead)
+                lbMeta.style.display = 'none';
+                lightbox.classList.add('open');
+                lightbox.setAttribute('aria-hidden','false');
+            }
+
+            // Open lightbox in metadata-only mode (no image)
+            function openMeta(card){
+                currentOpenCard = card || null;
+                // hide image area
+                lbImg.src = '';
+                lbImg.style.display = 'none';
+                // hide inline controls when showing meta-only
+                const lbControls = document.getElementById('lightbox-controls');
+                if(lbControls){ lbControls.style.display = 'none'; lbControls.setAttribute('aria-hidden','true'); }
+                if(card){
+                    const title = card.dataset.title || '';
+                    const artist = card.dataset.artist || '';
+                    const creation = card.dataset.creation || '';
+                    const collection = card.dataset.collection || '';
+                    lbTitle.textContent = title;
+                    lbArtist.textContent = artist ? ('Artiste: ' + artist) : '';
+                    lbCreation.textContent = creation ? ('Création: ' + creation) : '';
+                    lbCollection.textContent = collection ? ('Collection: ' + collection) : '';
+                    lbMeta.style.display = (title || artist || creation || collection) ? 'block' : 'none';
+                    lbMeta.setAttribute('aria-hidden', lbMeta.style.display === 'none' ? 'true' : 'false');
+                }
                 lightbox.classList.add('open');
                 lightbox.setAttribute('aria-hidden','false');
             }
@@ -250,12 +310,11 @@
                 const card = btn.closest('.art-card');
                 btn.textContent = "Plus d'info";
                 btn.addEventListener('click',(e)=>{
-                    const imgEl = card.querySelector('img');
-                    const full = card.getAttribute('data-full') || imgEl.src;
-                    if(lightbox.classList.contains('open') && lbImg.src === full){
+                    // Open metadata-only lightbox for this card
+                    if(lightbox.classList.contains('open') && currentOpenCard === card){
                         closeLightbox();
                     } else {
-                        openLightbox(full, card);
+                        openMeta(card);
                     }
                 });
             });
