@@ -28,9 +28,17 @@
         }
 
         /* Lightbox full-screen */
-        .lightbox{position:fixed;inset:0;background:var(--cream-200);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.25rem;gap:1rem;opacity:0;pointer-events:none;transition:opacity 0.18s}
+        .lightbox{position:fixed;inset:0;background:var(--cream-200);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1.25rem;gap:1rem;opacity:0;pointer-events:none;transition:opacity 0.18s;box-sizing:border-box;overflow:hidden}
         .lightbox.open{opacity:1;pointer-events:auto}
-        .lightbox img{max-width:90%;max-height:80vh;object-fit:contain;display:block}
+        /* Make the image adapt to viewport while leaving room for controls
+           Use viewport-relative limits to avoid overflow on small screens */
+        /* Constrain image so whole lightbox (image + controls) fits the viewport without scroll */
+        .lightbox img{max-width:min(90vw,1200px);max-height:calc(100vh - 220px);object-fit:contain;display:block}
+        .lightbox-controls,.lightbox-meta{max-width:90vw;box-sizing:border-box}
+        @media (max-height:480px){
+            .lightbox img{max-height:calc(100vh - 140px)}
+            .lightbox{padding:.5rem}
+        }
         .lightbox-close{position:fixed;top:12px;right:12px;background:transparent;border:2px solid var(--choco-900);color:var(--choco-900);width:40px;height:40px;border-radius:50%;font-size:1.1rem;cursor:pointer;z-index:1001}
         .lightbox-meta{max-width:90%;margin-top:1rem;text-align:center;color:var(--choco-900);padding:0.5rem 1rem}
         .lightbox-meta h3{margin:0;font-size:1.2rem}
@@ -67,295 +75,371 @@
                 <button data-filter="Paysage">Paysage</button>
             </div>
 
-            <div class="gallery-grid" id="galleryGrid">
-                <!-- Sample artwork cards (replace src with real images) -->
-                <article class="art-card" data-gallery="Moderne" data-title="Tableau 1" data-artist="Artiste A" data-creation="2022" data-collection="Moderne">
-                    <img src="https://placehold.co/600x400/8B5E3C/D9B99B.png?text=Tableau+1" alt="Tableau 1">
-                    <div class="meta">
-                        <h4>Tableau 1</h4>
-                        <p></p>
-                    </div>
-                    <div class="card-actions">
-                        <button class="info-btn" type="button"></button>
-                        <a class="contact-btn" href="#">Contact</a>
-                    </div>
-                </article>
+            <div class="gallery-grid" id="galleryGrid"></div>
 
-                <article class="art-card" data-gallery="Classique" data-title="Tableau 2" data-artist="Artiste B" data-creation="1890" data-collection="Classique">
-                    <img src="https://placehold.co/600x400/6B3F2B/EDE3DB.png?text=Tableau+2" alt="Tableau 2">
-                    <div class="meta">
-                        <h4>Tableau 2</h4>
-                        <p></p>
-                    </div>
-                    <div class="card-actions">
-                        <button class="info-btn" type="button"></button>
-                        <a class="contact-btn" href="#">Contact</a>
-                    </div>
-                </article>
+            <script>
+                (function(){
+                    const filtersEl = document.getElementById('filters');
+                    const grid = document.getElementById('galleryGrid');
 
-                <article class="art-card" data-gallery="Abstrait" data-title="Tableau 3" data-artist="Artiste C" data-creation="2018" data-collection="Abstrait">
-                    <img src="https://placehold.co/600x400/4E2A1E/D9B99B.png?text=Tableau+3" alt="Tableau 3">
-                    <div class="meta">
-                        <h4>Tableau 3</h4>
-                        <p></p>
-                    </div>
-                    <div class="card-actions">
-                        <button class="info-btn" type="button"></button>
-                        <a class="contact-btn" href="#">Contact</a>
-                    </div>
-                </article>
-
-                <article class="art-card" data-gallery="Paysage" data-title="Tableau 4" data-artist="Artiste D" data-creation="1995" data-collection="Paysage">
-                    <img src="https://placehold.co/600x400/3B2F2F/EDE3DB.png?text=Tableau+4" alt="Tableau 4">
-                    <div class="meta">
-                        <h4>Tableau 4</h4>
-                        <p></p>
-                    </div>
-                    <div class="card-actions">
-                        <button class="info-btn" type="button"></button>
-                        <a class="contact-btn" href="#">Contact</a>
-                    </div>
-                </article>
-
-                <article class="art-card" data-gallery="Moderne" data-title="Tableau 5" data-artist="Artiste E" data-creation="2021" data-collection="Moderne">
-                    <img src="https://placehold.co/600x400/8B5E3C/D9B99B.png?text=Tableau+5" alt="Tableau 5">
-                    <div class="meta">
-                        <h4>Tableau 5</h4>
-                        <p></p>
-                    </div>
-                    <div class="card-actions">
-                        <button class="info-btn" type="button"></button>
-                        <a class="contact-btn" href="#">Contact</a>
-                    </div>
-                </article>
-
-                <article class="art-card" data-gallery="Classique" data-title="Tableau 6" data-artist="Artiste F" data-creation="1870" data-collection="Classique">
-                    <img src="https://placehold.co/600x400/6B3F2B/EDE3DB.png?text=Tableau+6" alt="Tableau 6">
-                    <div class="meta">
-                        <h4>Tableau 6</h4>
-                        <p></p>
-                    </div>
-                    <div class="card-actions">
-                        <button class="info-btn" type="button"></button>
-                        <a class="contact-btn" href="#">Contact</a>
-                    </div>
-                </article>
-            </div>
-        </section>
-    </main>
-
-    <!-- Lightbox -->
-    <div id="lightbox" class="lightbox" aria-hidden="true">
-        <button id="lightbox-close" class="lightbox-close" aria-label="Fermer">✕</button>
-        <img id="lightbox-img" src="" alt="" />
-        <div id="lightbox-controls" class="lightbox-controls" aria-hidden="true">
-            <div>
-                <h3 id="lb-title-inline"></h3>
-                <div id="lb-detail" style="margin-top:.5rem">
-                    <p id="lb-detail-artist"></p>
-                    <p id="lb-detail-creation"></p>
-                    <p id="lb-detail-collection"></p>
-                </div>
-                <div class="lb-btns" style="margin-top:.6rem">
-                    <a id="lb-contact-inline" class="contact-inline" href="#">Contact</a>
-                </div>
-            </div>
-        </div>
-        <div class="lightbox-meta" id="lightbox-meta" aria-hidden="true">
-            <h3 id="lb-title"></h3>
-            <p id="lb-artist"></p>
-            <p id="lb-creation"></p>
-            <p id="lb-collection"></p>
-            <div style="margin-top:.6rem">
-                <button id="lb-view-collection" style="padding:.5rem .8rem;border-radius:8px;border:2px solid var(--choco-900);background:transparent;color:var(--choco-900);cursor:pointer">Voir la collection</button>
-            </div>
-        </div>
-    </div>
-
-    <footer>
-        <p>&copy; 2025 Galerie d'Art. Tous droits réservés.</p>
-    </footer>
-
-    <script>
-        // Simple filter by data-gallery
-        const filters = document.getElementById('filters');
-        const grid = document.getElementById('galleryGrid');
-        const cards = Array.from(grid.querySelectorAll('.art-card'));
-
-        filters.addEventListener('click', (e) => {
-            if (e.target.tagName !== 'BUTTON') return;
-            const filter = e.target.getAttribute('data-filter');
-            // toggle active class on buttons
-            filters.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === e.target));
-
-            cards.forEach(card => {
-                const gallery = card.getAttribute('data-gallery');
-                if (filter === 'all' || gallery === filter) {
-                    card.style.display = '';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-
-        // Lightbox behavior
-            (function(){
-            const lightbox = document.getElementById('lightbox');
-            const lbImg = document.getElementById('lightbox-img');
-            const lbClose = document.getElementById('lightbox-close');
-            const lbMeta = document.getElementById('lightbox-meta');
-            const lbTitle = document.getElementById('lb-title');
-            const lbArtist = document.getElementById('lb-artist');
-            const lbCreation = document.getElementById('lb-creation');
-            const lbCollection = document.getElementById('lb-collection');
-
-            let currentOpenCard = null;
-
-            function openLightbox(src, card){
-                currentOpenCard = card || null;
-                // ensure image is visible for image-mode
-                lbImg.style.display = '';
-                lbImg.src = src;
-                // show inline controls (title + detail + contact) and hide meta-only panel
-                const lbControls = document.getElementById('lightbox-controls');
-                const lbTitleInline = document.getElementById('lb-title-inline');
-                const lbDetailArtist = document.getElementById('lb-detail-artist');
-                const lbDetailCreation = document.getElementById('lb-detail-creation');
-                const lbDetailCollection = document.getElementById('lb-detail-collection');
-                const lbContactInline = document.getElementById('lb-contact-inline');
-                if(lbControls){ lbControls.style.display = 'flex'; lbControls.setAttribute('aria-hidden','false'); }
-                if(lbTitleInline) lbTitleInline.textContent = (card && card.dataset.title) ? card.dataset.title : '';
-                if(lbDetailArtist) lbDetailArtist.textContent = (card && card.dataset.artist) ? ('Artiste: ' + card.dataset.artist) : '';
-                if(lbDetailCreation) lbDetailCreation.textContent = (card && card.dataset.creation) ? ('Création: ' + card.dataset.creation) : '';
-                if(lbDetailCollection) lbDetailCollection.textContent = (card && card.dataset.collection) ? ('Collection: ' + card.dataset.collection) : '';
-                if(lbContactInline){ const t = (card && card.dataset.title) ? card.dataset.title : ''; lbContactInline.href = 'contact.html?art=' + encodeURIComponent(t); }
-                // populate metadata if provided
-                if(card){
-                    const title = card.dataset.title || '';
-                    const artist = card.dataset.artist || '';
-                    const creation = card.dataset.creation || '';
-                    const collection = card.dataset.collection || '';
-                    lbTitle.textContent = title;
-                    lbArtist.textContent = artist ? ('Artiste: ' + artist) : '';
-                    lbCreation.textContent = creation ? ('Création: ' + creation) : '';
-                    lbCollection.textContent = collection ? ('Collection: ' + collection) : '';
-                    lbMeta.style.display = (title || artist || creation || collection) ? 'block' : 'none';
-                    lbMeta.setAttribute('aria-hidden', lbMeta.style.display === 'none' ? 'true' : 'false');
-                } else {
-                    lbMeta.style.display = 'none';
-                    lbMeta.setAttribute('aria-hidden','true');
-                    lbTitle.textContent = '';
-                    lbArtist.textContent = '';
-                    lbCreation.textContent = '';
-                    lbCollection.textContent = '';
-                }
-
-                // hide meta-only panel when in image mode (we use inline detail instead)
-                lbMeta.style.display = 'none';
-                lightbox.classList.add('open');
-                lightbox.setAttribute('aria-hidden','false');
-            }
-
-            // Open lightbox in metadata-only mode (no image)
-            function openMeta(card){
-                currentOpenCard = card || null;
-                // hide image area
-                lbImg.src = '';
-                lbImg.style.display = 'none';
-                // hide inline controls when showing meta-only
-                const lbControls = document.getElementById('lightbox-controls');
-                if(lbControls){ lbControls.style.display = 'none'; lbControls.setAttribute('aria-hidden','true'); }
-                if(card){
-                    const title = card.dataset.title || '';
-                    const artist = card.dataset.artist || '';
-                    const creation = card.dataset.creation || '';
-                    const collection = card.dataset.collection || '';
-                    lbTitle.textContent = title;
-                    lbArtist.textContent = artist ? ('Artiste: ' + artist) : '';
-                    lbCreation.textContent = creation ? ('Création: ' + creation) : '';
-                    lbCollection.textContent = collection ? ('Collection: ' + collection) : '';
-                    lbMeta.style.display = (title || artist || creation || collection) ? 'block' : 'none';
-                    lbMeta.setAttribute('aria-hidden', lbMeta.style.display === 'none' ? 'true' : 'false');
-                }
-                lightbox.classList.add('open');
-                lightbox.setAttribute('aria-hidden','false');
-            }
-
-            function closeLightbox(){
-                lightbox.classList.remove('open');
-                lightbox.setAttribute('aria-hidden','true');
-                lbImg.src = '';
-                lbMeta.style.display = 'none';
-                lbMeta.setAttribute('aria-hidden','true');
-                lbTitle.textContent = '';
-                lbArtist.textContent = '';
-                lbCreation.textContent = '';
-                lbCollection.textContent = '';
-            }
-
-            document.querySelectorAll('.art-card img').forEach(imgEl=>{
-                imgEl.addEventListener('click', (e)=>{
-                    const card = e.target.closest('.art-card');
-                    const full = card.getAttribute('data-full') || imgEl.src;
-                    if(lightbox.classList.contains('open') && lbImg.src === full){
-                        closeLightbox();
-                    } else {
-                        openLightbox(full, card);
+                    // Ensure lightbox markup exists (image + inline controls + meta controls)
+                    function ensureLightboxExists(){
+                        if(document.getElementById('lightbox')) return;
+                        const lb = document.createElement('div');
+                        lb.id = 'lightbox';
+                        lb.className = 'lightbox';
+                        lb.setAttribute('aria-hidden','true');
+                        lb.innerHTML = `
+                            <button id="lightbox-close" class="lightbox-close" aria-label="Fermer">✕</button>
+                            <img id="lightbox-img" src="" alt="" />
+                            <div id="lightbox-controls" class="lightbox-controls" aria-hidden="true">
+                                <div>
+                                    <h3 id="lb-title-inline"></h3>
+                                    <div id="lb-detail" style="margin-top:.5rem">
+                                        <p id="lb-detail-artist"></p>
+                                        <p id="lb-detail-creation"></p>
+                                        <p id="lb-detail-collection"></p>
+                                    </div>
+                                    <div class="lb-btns" style="margin-top:.6rem">
+                                        <a id="lb-contact-inline" class="contact-inline" href="#">Contact</a>
+                                        <button id="lb-view-collection-inline" class="lb-view-collection-inline" style="padding:.45rem .7rem;border-radius:8px;border:2px solid var(--choco-900);background:transparent;color:var(--choco-900);cursor:pointer;font-weight:600;margin-left:.5rem">Voir la collection</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="lightbox-meta" id="lightbox-meta" aria-hidden="true">
+                                <h3 id="lb-title"></h3>
+                                <p id="lb-artist"></p>
+                                <p id="lb-creation"></p>
+                                <p id="lb-collection"></p>
+                                <div style="margin-top:.6rem">
+                                    <button id="lb-view-collection" style="padding:.5rem .8rem;border-radius:8px;border:2px solid var(--choco-900);background:transparent;color:var(--choco-900);cursor:pointer">Voir la collection</button>
+                                </div>
+                            </div>
+                        `;
+                        document.body.appendChild(lb);
                     }
-                });
-            });
+                    ensureLightboxExists();
 
-            // Wire 'Plus d'info' buttons (keep metadata hidden in gallery; show only in lightbox)
-            document.querySelectorAll('.info-btn').forEach(btn=>{
-                const card = btn.closest('.art-card');
-                btn.textContent = "Plus d'info";
-                btn.addEventListener('click',(e)=>{
-                    // Open metadata-only lightbox for this card
-                    if(lightbox.classList.contains('open') && currentOpenCard === card){
-                        closeLightbox();
-                    } else {
-                        openMeta(card);
+                    // Try to load canonical data first, fallback to images/index.json
+                    async function fetchImagesData(){
+                        let images = [];
+                        try{
+                            const res = await fetch('data/images.json', {cache: 'no-store'});
+                            if(res.ok) images = await res.json();
+                        }catch(e){ }
+
+                        if(!images || images.length === 0){
+                            try{
+                                const res2 = await fetch('images/index.json', {cache: 'no-store'});
+                                if(res2.ok){
+                                    const idx = await res2.json();
+                                    images = idx.map(i => ({ filename: i.filename, path: i.path, title: i.filename, artist: '', creationDate: '' }));
+                                }
+                            }catch(e){ }
+                        }
+                        return images || [];
                     }
-                });
-            });
 
-            // Populate contact links with the artwork title
-            document.querySelectorAll('.contact-btn').forEach(a=>{
-                const card = a.closest('.art-card');
-                const titleEl = card.querySelector('.meta h4');
-                const title = titleEl ? titleEl.textContent.trim() : 'Tableau';
-                a.href = 'contact.html?art=' + encodeURIComponent(title);
-            });
+                    async function loadGallery(){
+                        const images = await fetchImagesData();
+                        if(!images || images.length === 0){
+                            grid.innerHTML = '<p>Aucune image trouvée.</p>';
+                            return;
+                        }
 
-            // 'Voir la collection' button behaviour
-            const lbViewCollection = document.getElementById('lb-view-collection');
-            function applyFilter(name){
-                const btns = filters.querySelectorAll('button');
-                btns.forEach(b=> b.classList.toggle('active', b.getAttribute('data-filter') === name));
-                cards.forEach(card => {
-                    const gallery = card.getAttribute('data-gallery');
-                    if (name === 'all' || gallery === name) {
-                        card.style.display = '';
-                    } else {
-                        card.style.display = 'none';
+                        // Build unique collection list
+                        const collections = new Set();
+                        images.forEach(img => {
+                            const coll = img.collection || img.collectionName || img.data_collection || 'Sans catégorie';
+                            collections.add(coll);
+                        });
+
+                        // Rebuild filter buttons
+                        filtersEl.innerHTML = '';
+                        const allBtn = document.createElement('button');
+                        allBtn.setAttribute('data-filter','all');
+                        allBtn.className = 'active';
+                        allBtn.textContent = 'Toutes';
+                        filtersEl.appendChild(allBtn);
+                        Array.from(collections).forEach(name => {
+                            const b = document.createElement('button');
+                            b.setAttribute('data-filter', name);
+                            b.textContent = name;
+                            filtersEl.appendChild(b);
+                        });
+
+                        // Populate cards in JSON order
+                        grid.innerHTML = '';
+                        images.forEach(item => {
+                            const collection = item.collection || item.collectionName || item.data_collection || 'Sans catégorie';
+                            const title = item.title || item.filename || '';
+                            const artist = item.artist || '';
+                            const creation = item.creationDate || item.creation || '';
+                            const src = item.path || item.url || item.src || ('images/' + item.filename || '');
+
+                            const article = document.createElement('article');
+                            article.className = 'art-card';
+                            article.dataset.gallery = collection;
+                            article.dataset.title = title;
+                            article.dataset.artist = artist;
+                            article.dataset.creation = creation;
+                            article.dataset.collection = collection;
+
+                            const img = document.createElement('img');
+                            img.src = src;
+                            img.alt = title;
+
+                            const meta = document.createElement('div');
+                            meta.className = 'meta';
+                            const h4 = document.createElement('h4');
+                            h4.textContent = title;
+                            meta.appendChild(h4);
+                            const p = document.createElement('p');
+                            p.textContent = '';
+                            meta.appendChild(p);
+
+                            const actions = document.createElement('div');
+                            actions.className = 'card-actions';
+                            const infoBtn = document.createElement('button');
+                            infoBtn.className = 'info-btn';
+                            infoBtn.type = 'button';
+                            infoBtn.textContent = "Plus d'info";
+                            const contactA = document.createElement('a');
+                            contactA.className = 'contact-btn';
+                            contactA.href = 'contact.html?art=' + encodeURIComponent(title || '');
+                            contactA.textContent = 'Contact';
+                            actions.appendChild(infoBtn);
+                            actions.appendChild(contactA);
+
+                            article.appendChild(img);
+                            article.appendChild(meta);
+                            article.appendChild(actions);
+
+                            grid.appendChild(article);
+                        });
+
+                        setupInteractions();
                     }
-                });
-            }
-            if(lbViewCollection){
-                lbViewCollection.addEventListener('click', ()=>{
-                    if(!currentOpenCard) return;
-                    const collection = currentOpenCard.dataset.collection || currentOpenCard.getAttribute('data-gallery') || '';
-                    closeLightbox();
-                    if(collection){
-                        applyFilter(collection);
-                    }
-                });
-            }
 
-            lbClose.addEventListener('click', closeLightbox);
-            lbImg.addEventListener('click', closeLightbox);
-            document.addEventListener('keydown', e=>{ if(e.key === 'Escape') closeLightbox(); });
-        })();
-    </script>
+                        // Insert lightbox markup if missing (ensures script targets exist)
+                        function ensureLightboxExists(){
+                            if(document.getElementById('lightbox')) return;
+                            const lb = document.createElement('div');
+                            lb.id = 'lightbox';
+                            lb.className = 'lightbox';
+                            lb.setAttribute('aria-hidden','true');
+                            lb.innerHTML = `
+                                <button id="lightbox-close" class="lightbox-close" aria-label="Fermer">✕</button>
+                                <img id="lightbox-img" src="" alt="" />
+                                <div id="lightbox-controls" class="lightbox-controls" aria-hidden="true">
+                                    <div>
+                                        <h3 id="lb-title-inline"></h3>
+                                        <div id="lb-detail" style="margin-top:.5rem">
+                                            <p id="lb-detail-artist"></p>
+                                            <p id="lb-detail-creation"></p>
+                                            <p id="lb-detail-collection"></p>
+                                        </div>
+                                        <div class="lb-btns" style="margin-top:.6rem">
+                                            <a id="lb-contact-inline" class="contact-inline" href="#">Contact</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="lightbox-meta" id="lightbox-meta" aria-hidden="true">
+                                    <h3 id="lb-title"></h3>
+                                    <p id="lb-artist"></p>
+                                    <p id="lb-creation"></p>
+                                    <p id="lb-collection"></p>
+                                    <div style="margin-top:.6rem">
+                                        <button id="lb-view-collection" style="padding:.5rem .8rem;border-radius:8px;border:2px solid var(--choco-900);background:transparent;color:var(--choco-900);cursor:pointer">Voir la collection</button>
+                                    </div>
+                                </div>
+                            `;
+                            document.body.appendChild(lb);
+                        }
+
+                        ensureLightboxExists();
+
+                    function setupInteractions(){
+                        const cards = Array.from(grid.querySelectorAll('.art-card'));
+
+                        filtersEl.addEventListener('click', (e) => {
+                            if (e.target.tagName !== 'BUTTON') return;
+                            const filter = e.target.getAttribute('data-filter');
+                            filtersEl.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === e.target));
+                            cards.forEach(card => {
+                                const gallery = card.getAttribute('data-gallery') || '';
+                                if (filter === 'all' || gallery === filter) {
+                                    card.style.display = '';
+                                } else {
+                                    card.style.display = 'none';
+                                }
+                            });
+                        });
+
+                        // Lightbox wiring
+                        const lightbox = document.getElementById('lightbox');
+                        const lbImg = document.getElementById('lightbox-img');
+                        const lbClose = document.getElementById('lightbox-close');
+                        const lbMeta = document.getElementById('lightbox-meta');
+                        const lbControls = document.getElementById('lightbox-controls');
+                        const lbTitleInline = document.getElementById('lb-title-inline');
+                        const lbDetailArtist = document.getElementById('lb-detail-artist');
+                        const lbDetailCreation = document.getElementById('lb-detail-creation');
+                        const lbDetailCollection = document.getElementById('lb-detail-collection');
+                        const lbContactInline = document.getElementById('lb-contact-inline');
+                        const lbViewCollection = document.getElementById('lb-view-collection');
+                        const lbTitle = document.getElementById('lb-title');
+                        const lbArtist = document.getElementById('lb-artist');
+                        const lbCreation = document.getElementById('lb-creation');
+                        const lbCollection = document.getElementById('lb-collection');
+
+                        let currentOpenCard = null;
+
+                        function openLightbox(src, card){
+                            currentOpenCard = card || null;
+                            lbImg.style.display = '';
+                            lbImg.src = src;
+                            // Prevent page scrolling while lightbox is open
+                            try{ document.body.style.overflow = 'hidden'; }catch(e){}
+                            if(lbControls){ lbControls.style.display = 'flex'; lbControls.setAttribute('aria-hidden','false'); }
+                            if(lbTitleInline) lbTitleInline.textContent = (card && card.dataset.title) ? card.dataset.title : '';
+                            if(lbDetailArtist) lbDetailArtist.textContent = (card && card.dataset.artist) ? ('Artiste: ' + card.dataset.artist) : '';
+                            if(lbDetailCreation) lbDetailCreation.textContent = (card && card.dataset.creation) ? ('Création: ' + card.dataset.creation) : '';
+                            if(lbDetailCollection) lbDetailCollection.textContent = (card && card.dataset.collection) ? ('Collection: ' + card.dataset.collection) : '';
+                            if(lbContactInline){ const t = (card && card.dataset.title) ? card.dataset.title : ''; lbContactInline.href = 'contact.html?art=' + encodeURIComponent(t); }
+
+                            if(card){
+                                const title = card.dataset.title || '';
+                                const artist = card.dataset.artist || '';
+                                const creation = card.dataset.creation || '';
+                                const collection = card.dataset.collection || '';
+                                lbTitle.textContent = title;
+                                lbArtist.textContent = artist ? ('Artiste: ' + artist) : '';
+                                lbCreation.textContent = creation ? ('Création: ' + creation) : '';
+                                lbCollection.textContent = collection ? ('Collection: ' + collection) : '';
+                                lbMeta.style.display = (title || artist || creation || collection) ? 'block' : 'none';
+                                lbMeta.setAttribute('aria-hidden', lbMeta.style.display === 'none' ? 'true' : 'false');
+                            }
+
+                            lbMeta.style.display = 'none';
+                            lightbox.classList.add('open');
+                            lightbox.setAttribute('aria-hidden','false');
+                        }
+
+                        function openMeta(card){
+                            currentOpenCard = card || null;
+                            lbImg.src = '';
+                            lbImg.style.display = 'none';
+                            // Prevent page scrolling while lightbox is open
+                            try{ document.body.style.overflow = 'hidden'; }catch(e){}
+                            if(lbControls){ lbControls.style.display = 'none'; lbControls.setAttribute('aria-hidden','true'); }
+                            if(card){
+                                const title = card.dataset.title || '';
+                                const artist = card.dataset.artist || '';
+                                const creation = card.dataset.creation || '';
+                                const collection = card.dataset.collection || '';
+                                lbTitle.textContent = title;
+                                lbArtist.textContent = artist ? ('Artiste: ' + artist) : '';
+                                lbCreation.textContent = creation ? ('Création: ' + creation) : '';
+                                lbCollection.textContent = collection ? ('Collection: ' + collection) : '';
+                                lbMeta.style.display = (title || artist || creation || collection) ? 'block' : 'none';
+                                lbMeta.setAttribute('aria-hidden', lbMeta.style.display === 'none' ? 'true' : 'false');
+                            }
+                            lightbox.classList.add('open');
+                            lightbox.setAttribute('aria-hidden','false');
+                        }
+
+                        function closeLightbox(){
+                            lightbox.classList.remove('open');
+                            lightbox.setAttribute('aria-hidden','true');
+                            // Restore page scrolling
+                            try{ document.body.style.overflow = ''; }catch(e){}
+                            lbImg.src = '';
+                            lbMeta.style.display = 'none';
+                            lbMeta.setAttribute('aria-hidden','true');
+                            lbTitle.textContent = '';
+                            lbArtist.textContent = '';
+                            lbCreation.textContent = '';
+                            lbCollection.textContent = '';
+                        }
+
+                        cards.forEach(card=>{
+                            const imgEl = card.querySelector('img');
+                            if(imgEl){
+                                imgEl.addEventListener('click',(e)=>{
+                                    const full = card.getAttribute('data-full') || imgEl.src;
+                                    if(lightbox.classList.contains('open') && document.getElementById('lightbox-img').src === full){
+                                        closeLightbox();
+                                    } else {
+                                        openLightbox(full, card);
+                                    }
+                                });
+                            }
+
+                            const infoBtn = card.querySelector('.info-btn');
+                            if(infoBtn){
+                                infoBtn.addEventListener('click', ()=>{
+                                    if(lightbox.classList.contains('open') && currentOpenCard === card){
+                                        closeLightbox();
+                                    } else {
+                                        openMeta(card);
+                                    }
+                                });
+                            }
+
+                            const contactA = card.querySelector('.contact-btn');
+                            if(contactA){
+                                const titleEl = card.querySelector('.meta h4');
+                                const title = titleEl ? titleEl.textContent.trim() : 'Tableau';
+                                contactA.href = 'contact.html?art=' + encodeURIComponent(title);
+                            }
+                        });
+
+                        // Wire meta 'Voir la collection' button
+                        if(lbViewCollection){
+                            lbViewCollection.addEventListener('click', ()=>{
+                                if(!currentOpenCard) return;
+                                    const collection = currentOpenCard.dataset.collection || currentOpenCard.getAttribute('data-gallery') || 'Sans catégorie';
+                                closeLightbox();
+                                if(collection){
+                                    applyFilter(collection);
+                                }
+                            });
+                        }
+                        // Wire inline 'Voir la collection' button if present
+                        const lbViewCollectionInline = document.getElementById('lb-view-collection-inline');
+                        if(lbViewCollectionInline){
+                            lbViewCollectionInline.addEventListener('click', ()=>{
+                                if(!currentOpenCard) return;
+                                const collection = currentOpenCard.dataset.collection || currentOpenCard.getAttribute('data-gallery') || 'Sans catégorie';
+                                closeLightbox();
+                                if(collection){
+                                    applyFilter(collection);
+                                }
+                            });
+                        }
+
+                        function applyFilter(name){
+                            const btns = filtersEl.querySelectorAll('button');
+                            btns.forEach(b=> b.classList.toggle('active', b.getAttribute('data-filter') === name));
+                            cards.forEach(card => {
+                                const gallery = card.getAttribute('data-gallery') || '';
+                                if (name === 'all' || gallery === name) {
+                                    card.style.display = '';
+                                } else {
+                                    card.style.display = 'none';
+                                }
+                            });
+                        }
+
+                        lbClose.addEventListener('click', closeLightbox);
+                        lbImg.addEventListener('click', closeLightbox);
+                        document.addEventListener('keydown', e=>{ if(e.key === 'Escape') closeLightbox(); });
+                    }
+
+                    // Start
+                    loadGallery();
+                })();
+            </script>
 </body>
 </html>
