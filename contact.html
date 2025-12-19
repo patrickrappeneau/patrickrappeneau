@@ -49,13 +49,13 @@
         <div id="form-container" class="form-container">
             <form id="contact-form" class="contact-form" style="margin-top:1rem">
                 <label for="name">Nom</label>
-                <input id="name" name="name" type="text" required>
+                <input id="name" type="text" required>
 
                 <label for="email">Email</label>
-                <input id="email" name="email" type="email" required>
+                <input id="email" type="email" required>
 
                 <label for="message">Message</label>
-                <textarea id="message" name="message" required></textarea>
+                <textarea id="message" required></textarea>
 
                 <button type="submit" class="btn">Envoyer</button>
             </form>
@@ -71,10 +71,9 @@
             e.preventDefault();
             
             // Récupération des données du formulaire
-            const formData = new FormData(e.target);
-            const name = formData.get('name');
-            const email = formData.get('email');
-            const message = formData.get('message');
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
             
             // URL de soumission du formulaire Google
             const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdqaSQbLkl23pjH8sQ90Qk9uWVundlPHWBuNVd-50jQeQ5iOw/formResponse';
