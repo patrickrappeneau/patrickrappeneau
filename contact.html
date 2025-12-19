@@ -71,39 +71,56 @@
             e.preventDefault();
             
             // Récupération des données du formulaire
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
             
             // URL de soumission du formulaire Google
             const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdqaSQbLkl23pjH8sQ90Qk9uWVundlPHWBuNVd-50jQeQ5iOw/formResponse';
             
-            // Préparation des données pour l'envoi
-            const formDataEncoded = new URLSearchParams();
-            formDataEncoded.append('entry.1746976939', name);
-            formDataEncoded.append('entry.1691238699', email);
-            formDataEncoded.append('entry.1353272445', message);
+            // Création d'un formulaire dynamique pour la soumission
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = googleFormUrl;
+            form.target = 'hidden-iframe';
+            
+            // Ajout des champs cachés
+            const addField = (name, value) => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = name;
+                input.value = value;
+                form.appendChild(input);
+            };
+            
+            addField('entry.1746976939', name);
+            addField('entry.1691238699', email);
+            addField('entry.1353272445', message);
+            
+            // Création d'un iframe caché pour la soumission
+            const iframe = document.createElement('iframe');
+            iframe.name = 'hidden-iframe';
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
             
             try {
-                // Envoi des données via fetch
-                await fetch(googleFormUrl, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: formDataEncoded.toString()
-                });
+                // Soumission du formulaire
+                document.body.appendChild(form);
+                form.submit();
                 
                 // Afficher le message de succès et masquer le formulaire
                 document.getElementById('form-container').classList.add('hidden');
                 document.getElementById('success-message').style.display = 'block';
                 
-                // Réinitialiser le formulaire
-                e.target.reset();
-                
-                // Faire défiler vers le message de succès
-                document.getElementById('success-message').scrollIntoView({ behavior: 'smooth' });
+                // Réinitialiser le formulaire après un court délai
+                setTimeout(() => {
+                    e.target.reset();
+                    document.body.removeChild(form);
+                    document.body.removeChild(iframe);
+                    
+                    // Faire défiler vers le message de succès
+                    document.getElementById('success-message').scrollIntoView({ behavior: 'smooth' });
+                }, 1000);
                 
             } catch (error) {
                 console.error('Erreur lors de l\'envoi du formulaire :', error);
