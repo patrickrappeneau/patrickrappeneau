@@ -69,48 +69,17 @@
                         <span class="stat-label">Œuvres</span>
                     </div>
                     <div class="stat">
-                        <span class="stat-number">25</span>
+                        <span class="stat-number">1</span>
                         <span class="stat-label">Expositions</span>
                     </div>
                     <div class="stat">
-                        <span class="stat-number">12</span>
-                        <span class="stat-label">Pays</span>
+                        <span class="stat-number">4+</span>
+                        <span class="stat-label">Collections</span>
                     </div>
-                </div>
-                <a href="about.html" class="btn">En savoir plus</a>
-            </div>
-            <div class="artist-image">
-                <img src="images/portrait-artiste.jpg" alt="Patrick Rappeneau">
-            </div>
-        </div>
 
-        <div class="events-section">
-            <h3>Prochains Événements</h3>
-            <div class="events-timeline">
-                <div class="event">
-                    <div class="event-date">15 Janv. 2026</div>
-                    <div class="event-details">
-                        <h4>Vernissage - Galerie L'Écrin</h4>
-                        <p>Paris, France - 18h30</p>
-                        <a href="#" class="event-link">Réserver</a>
-                    </div>
                 </div>
-                <div class="event">
-                    <div class="event-date">22 Fév. 2026</div>
-                    <div class="event-details">
-                        <h4>Conférence sur l'art contemporain</h4>
-                        <p>Montréal, Canada - 14h00</p>
-                        <a href="#" class="event-link">S'inscrire</a>
-                    </div>
-                </div>
-                <div class="event">
-                    <div class="event-date">10 Mars 2026</div>
-                    <div class="event-details">
-                        <h4>Atelier de peinture</h4>
-                        <p>Bruxelles, Belgique - 10h00</p>
-                        <a href="#" class="event-link">S'inscrire</a>
-                    </div>
-                </div>
+                <a href="galerie.html" class="btn">Voir ma collection</a>
+                <a href="about.html" class="btn">En savoir plus</a>
             </div>
         </div>
     </section>
@@ -158,11 +127,16 @@
                             const options = { year: 'numeric', month: 'long', day: 'numeric' };
                             const formattedDate = date.toLocaleDateString('fr-FR', options);
                             
+                            let linkHtml = '';
+                            if (article.lien) {
+                                const link = article.titre === 'Nouvelle Collection' ? 'galerie.html' : `articles/${article.lien}`;
+                                linkHtml = `<a href="${link}" class="read-more">Lire la suite</a>`;
+                            }
                             articleElement.innerHTML = `
                                 <h3>${article.titre}</h3>
                                 <time datetime="${article.date}">${formattedDate}</time>
                                 <p>${article.texte}</p>
-                                <a href="articles/${article.lien}" class="read-more">Lire la suite</a>
+                                ${linkHtml}
                             `;
                             
                             container.appendChild(articleElement);
@@ -203,8 +177,11 @@
                 
                 // Ajouter chaque image au carrousel
                 featuredImages.forEach((image, index) => {
-                    const slide = document.createElement('div');
+                    const slide = document.createElement('a');
+                    slide.href = 'galerie.html';
                     slide.className = 'carousel-item';
+                    slide.style.textDecoration = 'none';
+                    slide.style.color = 'inherit';
                     slide.innerHTML = `
                         <div class="artwork-preview">
                             <img src="${image.path}" alt="${image.title || 'Œuvre d\'art'}" class="carousel-image">
@@ -473,7 +450,8 @@
         }
 
         .article-card h3 {
-            color: #333;
+            color: var(--choco-800);
+            font-weight: bold;
             margin: 0 0 1rem 0;
             font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
@@ -676,7 +654,7 @@
             padding: 0 1.5rem 1.5rem;
             color: #8e44ad;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: bold;
             transition: color 0.3s ease;
         }
 

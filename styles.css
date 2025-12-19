@@ -389,10 +389,138 @@ header .logo{font-size:1.5rem;font-weight:700;color:white}
         padding: 0 1.2rem 1.2rem;
     }
 }
-.artist{display:grid;grid-template-columns:1fr;gap:1.25rem;max-width:1000px;margin:1.5rem auto;padding:0 1rem}
-.artist .photo{border-radius:10px;overflow:hidden}
-.artist .photo img{width:100%;height:100%;object-fit:cover;display:block}
-.artist .bio{padding:1rem;background:linear-gradient(180deg,#fff 0%,var(--cream-200) 100%);border-radius:10px}
+/* Style pour la section artiste */
+.artist {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.artist .bio {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.artist .photo {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 1.5rem;
+    border: 4px solid var(--accent);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    display: block;
+}
+
+.artist .photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.artist h2 {
+    text-align: center;
+    color: var(--choco-800);
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    position: relative;
+    padding-bottom: 0.8rem;
+}
+
+.artist h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: var(--accent);
+}
+
+.artist p {
+    color: var(--choco-700);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    text-align: justify;
+    text-justify: inter-word;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1rem;
+}
+
+.artist .btn {
+    display: block;
+    width: fit-content;
+    margin: 1rem auto 0.5rem;
+    text-align: center;
+    background: var(--choco-700);
+    color: white;
+    padding: 0.8rem 2rem;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid var(--choco-700);
+}
+
+.artist .btn:hover {
+    background: transparent;
+    color: var(--choco-700);
+}
+
+.artist h3 {
+    text-align: center;
+    color: var(--choco-800);
+    margin: 3rem 0 1.5rem;
+    font-size: 1.5rem;
+}
+
+.contact-info {
+    text-align: center;
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(139, 94, 60, 0.1);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1rem 1rem 0;
+}
+
+.contact-info p {
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+    .artist .bio {
+        padding: 3rem;
+    }
+    
+    .artist h2 {
+        font-size: 2.2rem;
+    }
+    
+    .artist p {
+        font-size: 1.1rem;
+    }
+}
+
+.artist .bio ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+    color: var(--choco-700);
+}
+
+.artist .bio li {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
 
 @media(min-width:800px){
     .artist{grid-template-columns:340px 1fr;align-items:start}

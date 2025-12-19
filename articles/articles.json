@@ -1,32 +1,8 @@
 [
   {
     "date": "2025-12-19",
-    "titre": "Exposition Hiver 2025",
-    "texte": "Découvrez notre nouvelle exposition hivernale mettant en avant les œuvres les plus récentes de Patrick Rappeneau.",
-    "lien": "page-article.html"
-  },
-  {
-    "date": "2025-12-15",
-    "titre": "Atelier d'artiste",
-    "texte": "Participez à un atelier exclusif avec l'artiste les 20 et 21 décembre. Places limitées.",
-    "lien": "atelier.html"
-  },
-  {
-    "date": "2025-12-10",
     "titre": "Nouvelle Collection",
     "texte": "La collection \"Lumière d'Hiver\" est maintenant disponible en édition limitée.",
-    "lien": "collection.html"
-  },
-  {
-    "date": "2025-12-10",
-    "titre": "Nouvelle Collection",
-    "texte": "La collection \"Lumière d'Hiver\" est maintenant disponible en édition limitée.",
-    "lien": "collection.html"
-  },
-  {
-    "date": "2025-12-09",
-    "titre": "Nouvelle Collection 2",
-    "texte": "La collection \"Lumière d'Hiver\" est maintenant disponible en édition limitée.",
-    "lien": "collection2.html"
+    "lien": "galerie.html"
   }
 ]
