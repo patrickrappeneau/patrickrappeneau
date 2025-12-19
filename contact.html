@@ -70,36 +70,50 @@
         document.getElementById('contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdqaSQbLkl23pjH8sQ90Qk9uWVundlPHWBuNVd-50jQeQ5iOw/formResponse';
+            // Récupération des valeurs
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
             
-            // Récupération manuelle pour être certain des valeurs
-            const nameValue = document.getElementById('name').value;
-            const emailValue = document.getElementById('email').value;
-            const messageValue = document.getElementById('message').value;
-
-            // Construction manuelle de la requête
-            const formData = new URLSearchParams();
-            formData.append('entry.1746976939', nameValue);
-            formData.append('entry.1691238699', emailValue);
-            formData.append('entry.1353272445', messageValue);
+            // Création d'un formulaire dynamique
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = 'https://docs.google.com/forms/d/e/1FAIpQLSdqaSQbLkl23pjH8sQ90Qk9uWVundlPHWBuNVd-50jQeQ5iOw/formResponse';
+            form.target = 'hidden-iframe';
             
-            fetch(googleFormUrl, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: formData.toString()
-            }).then(() => {
-                // Succès (même en no-cors)
+            // Fonction utilitaire pour ajouter des champs cachés
+            function addField(name, value) {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = name;
+                input.value = value;
+                form.appendChild(input);
+            }
+            
+            // Ajout des champs avec les bons noms
+            addField('entry.1746976939', name);
+            addField('entry.1691238699', email);
+            addField('entry.1353272445', message);
+            
+            // Création d'un iframe caché pour la soumission
+            const iframe = document.createElement('iframe');
+            iframe.name = 'hidden-iframe';
+            iframe.style.display = 'none';
+            document.body.appendChild(iframe);
+            
+            // Ajout du formulaire à la page et soumission
+            document.body.appendChild(form);
+            form.submit();
+            
+            // Nettoyage et affichage du message de succès
+            setTimeout(() => {
+                document.body.removeChild(form);
+                document.body.removeChild(iframe);
                 document.getElementById('form-container').classList.add('hidden');
                 document.getElementById('success-message').style.display = 'block';
                 document.getElementById('success-message').scrollIntoView({ behavior: 'smooth' });
                 e.target.reset();
-            }).catch((error) => {
-                console.error('Erreur:', error);
-                alert('Erreur lors de l\'envoi.');
-            });
+            }, 1000);
         });
     </script>
 </body>
