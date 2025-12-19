@@ -12,12 +12,13 @@
 
 body{font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;color:var(--text);background:var(--cream-200);line-height:1.6}
 
-header{background:linear-gradient(135deg,var(--choco-800) 0%,var(--choco-500) 100%);color:white;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center}
+header{background:linear-gradient(135deg,var(--choco-800) 0%,var(--choco-500) 100%);color:white;padding:1rem 2rem;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
 
 header h1{font-size:1.4rem}
 
-nav ul{list-style:none;display:flex;gap:1rem}
-nav a{color:white;text-decoration:none;font-weight:600}
+nav ul{list-style:none;display:flex;gap:2rem;justify-content:center;margin-top:0.5rem;padding:0;flex-wrap:wrap}
+nav a{color:white;text-decoration:none;font-weight:600;font-size:1.1rem;padding:0.3rem 0.5rem;border-radius:4px;transition:background-color 0.2s}
+nav a:hover{background-color:rgba(255,255,255,0.15)}
 
 .hero{background:linear-gradient(135deg,var(--choco-800) 0%,var(--choco-500) 100%);color:white;padding:5rem 2rem;text-align:center}
 .hero h2{font-size:2rem;margin-bottom:0.6rem}
@@ -44,7 +45,7 @@ footer{background:var(--choco-900);color:var(--cream-200);text-align:center;padd
 .indicator.active{background-color:var(--accent)}
 
 /* Header/logo refinements */
-header .logo{font-size:1.5rem;font-weight:700;color:white}
+header .logo{font-size:1.8rem;font-weight:700;color:white;margin-bottom:0.5rem}
 
 /* About / Contact layout */
 .about-hero{padding:3rem 1rem;background:linear-gradient(180deg,var(--cream-200) 0%, #fff 100%);text-align:center}
