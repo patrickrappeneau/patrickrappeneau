@@ -67,65 +67,39 @@
     </footer>
 
     <script>
-        document.getElementById('contact-form').addEventListener('submit', async function(e) {
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Récupération des données du formulaire
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const message = document.getElementById('message').value.trim();
-            
-            // URL de soumission du formulaire Google
             const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdqaSQbLkl23pjH8sQ90Qk9uWVundlPHWBuNVd-50jQeQ5iOw/formResponse';
             
-            // Création d'un formulaire dynamique pour la soumission
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = googleFormUrl;
-            form.target = 'hidden-iframe';
+            // Récupération manuelle pour être certain des valeurs
+            const nameValue = document.getElementById('name').value;
+            const emailValue = document.getElementById('email').value;
+            const messageValue = document.getElementById('message').value;
+
+            // Construction manuelle de la requête
+            const formData = new URLSearchParams();
+            formData.append('entry.1746976939', nameValue);
+            formData.append('entry.1691238699', emailValue);
+            formData.append('entry.1353272445', messageValue);
             
-            // Ajout des champs cachés
-            const addField = (name, value) => {
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = name;
-                input.value = value;
-                form.appendChild(input);
-            };
-            
-            addField('entry.1746976939', name);
-            addField('entry.1691238699', email);
-            addField('entry.1353272445', message);
-            
-            // Création d'un iframe caché pour la soumission
-            const iframe = document.createElement('iframe');
-            iframe.name = 'hidden-iframe';
-            iframe.style.display = 'none';
-            document.body.appendChild(iframe);
-            
-            try {
-                // Soumission du formulaire
-                document.body.appendChild(form);
-                form.submit();
-                
-                // Afficher le message de succès et masquer le formulaire
+            fetch(googleFormUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: formData.toString()
+            }).then(() => {
+                // Succès (même en no-cors)
                 document.getElementById('form-container').classList.add('hidden');
                 document.getElementById('success-message').style.display = 'block';
-                
-                // Réinitialiser le formulaire après un court délai
-                setTimeout(() => {
-                    e.target.reset();
-                    document.body.removeChild(form);
-                    document.body.removeChild(iframe);
-                    
-                    // Faire défiler vers le message de succès
-                    document.getElementById('success-message').scrollIntoView({ behavior: 'smooth' });
-                }, 1000);
-                
-            } catch (error) {
-                console.error('Erreur lors de l\'envoi du formulaire :', error);
-                alert('Une erreur est survenue lors de l\'envoi du formulaire. Veuillez réessayer.');
-            }
+                document.getElementById('success-message').scrollIntoView({ behavior: 'smooth' });
+                e.target.reset();
+            }).catch((error) => {
+                console.error('Erreur:', error);
+                alert('Erreur lors de l\'envoi.');
+            });
         });
     </script>
 </body>
