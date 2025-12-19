@@ -42,8 +42,8 @@
         <p style="text-align:center;max-width:800px;margin:0.5rem auto;color:#6b5246">Remplissez le formulaire ci-dessous pour me joindre. Je vous répondrai sous 48 heures.</p>
 
         <div id="success-message" class="success-message">
-            <h2>Message envoyé avec succès !</h2>
-            <p>Je vous répondrai dans les plus brefs délais.</p>
+            <h2>Merci, votre message a bien été envoyé !</h2>
+            <p>Je vous répondrai très prochainement.</p>
         </div>
 
         <div id="form-container" class="form-container">
@@ -67,7 +67,7 @@
     </footer>
 
     <script>
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
+        document.getElementById('contact-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             // Récupération des données du formulaire
@@ -76,42 +76,25 @@
             const email = formData.get('email');
             const message = formData.get('message');
             
-            // Construction des données pour Google Forms
+            // URL de soumission du formulaire Google
             const googleFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdqaSQbLkl23pjH8sQ90Qk9uWVundlPHWBuNVd-50jQeQ5iOw/formResponse';
             
-            // Création d'un formulaire dynamique pour la soumission
-            const form = document.createElement('form');
-            form.method = 'POST';
-            form.action = googleFormUrl;
-            form.target = 'hidden-iframe';
+            // Préparation des données pour l'envoi
+            const formDataEncoded = new URLSearchParams();
+            formDataEncoded.append('entry.1746976939', name);
+            formDataEncoded.append('entry.1691238699', email);
+            formDataEncoded.append('entry.1353272445', message);
             
-            // Ajout des champs cachés
-            const addField = (name, value) => {
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = name;
-                input.value = value;
-                form.appendChild(input);
-            };
-            
-            addField('entry.2005620554', name);
-            addField('entry.1045781291', email);
-            addField('entry.839337160', message);
-            
-            // Création d'un iframe caché pour la soumission
-            const iframe = document.createElement('iframe');
-            iframe.name = 'hidden-iframe';
-            iframe.style.display = 'none';
-            document.body.appendChild(iframe);
-            
-            // Soumission du formulaire
-            document.body.appendChild(form);
-            form.submit();
-            
-            // Nettoyage
-            setTimeout(() => {
-                document.body.removeChild(form);
-                document.body.removeChild(iframe);
+            try {
+                // Envoi des données via fetch
+                await fetch(googleFormUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: formDataEncoded.toString()
+                });
                 
                 // Afficher le message de succès et masquer le formulaire
                 document.getElementById('form-container').classList.add('hidden');
@@ -122,7 +105,11 @@
                 
                 // Faire défiler vers le message de succès
                 document.getElementById('success-message').scrollIntoView({ behavior: 'smooth' });
-            }, 100);
+                
+            } catch (error) {
+                console.error('Erreur lors de l\'envoi du formulaire :', error);
+                alert('Une erreur est survenue lors de l\'envoi du formulaire. Veuillez réessayer.');
+            }
         });
     </script>
 </body>
