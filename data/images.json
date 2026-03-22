@@ -234,17 +234,17 @@
     {
         "artist":  "Patrick RAPPENEAU",
         "creationDate":  "2025-03-22T00:00:00.000Z",
-        "path":  "images/Chalut dans la tempete.jpg",
+        "path":  "images/Chalut à la derive.jpg",
         "collection":  "Navigation",
-        "filename":  "Chalut dans la tempete.jpg",
+        "filename":  "Chalut à la derive.jpg",
         "title":  ""
     },
     {
         "artist":  "Patrick RAPPENEAU",
         "creationDate":  "2025-03-22T00:00:00.000Z",
-        "path":  "images/Chalut à la derive.jpg",
+        "path":  "images/Chalut dans la tempete.jpg",
         "collection":  "Navigation",
-        "filename":  "Chalut à la derive.jpg",
+        "filename":  "Chalut dans la tempete.jpg",
         "title":  ""
     },
     {
@@ -370,6 +370,22 @@
     {
         "artist":  "Patrick RAPPENEAU",
         "creationDate":  "2025-03-22T00:00:00.000Z",
+        "path":  "images/Femme à la natte.jpg",
+        "collection":  "Decouverts",
+        "filename":  "Femme à la natte.jpg",
+        "title":  ""
+    },
+    {
+        "artist":  "Patrick RAPPENEAU",
+        "creationDate":  "2025-03-22T00:00:00.000Z",
+        "path":  "images/Femme à l\u0027envers.jpg",
+        "collection":  "Decouverts",
+        "filename":  "Femme à l\u0027envers.jpg",
+        "title":  ""
+    },
+    {
+        "artist":  "Patrick RAPPENEAU",
+        "creationDate":  "2025-03-22T00:00:00.000Z",
         "path":  "images/Femme au beret.jpg",
         "collection":  "Decouverts",
         "filename":  "Femme au beret.jpg",
@@ -450,22 +466,6 @@
     {
         "artist":  "Patrick RAPPENEAU",
         "creationDate":  "2025-03-22T00:00:00.000Z",
-        "path":  "images/Femme à l\u0027envers.jpg",
-        "collection":  "Decouverts",
-        "filename":  "Femme à l\u0027envers.jpg",
-        "title":  ""
-    },
-    {
-        "artist":  "Patrick RAPPENEAU",
-        "creationDate":  "2025-03-22T00:00:00.000Z",
-        "path":  "images/Femme à la natte.jpg",
-        "collection":  "Decouverts",
-        "filename":  "Femme à la natte.jpg",
-        "title":  ""
-    },
-    {
-        "artist":  "Patrick RAPPENEAU",
-        "creationDate":  "2025-03-22T00:00:00.000Z",
         "path":  "images/Gina.jpg",
         "collection":  "Decouverts",
         "filename":  "Gina.jpg",
@@ -533,54 +533,6 @@
         "path":  "images/Keith Richard.jpg",
         "collection":  "Decouverts",
         "filename":  "Keith Richard.jpg",
-        "title":  ""
-    },
-    {
-        "artist":  "Patrick RAPPENEAU",
-        "creationDate":  "2025-03-22T00:00:00.000Z",
-        "path":  "images/L\u0027afgan.jpg",
-        "collection":  "Decouverts",
-        "filename":  "L\u0027afgan.jpg",
-        "title":  ""
-    },
-    {
-        "artist":  "Patrick RAPPENEAU",
-        "creationDate":  "2025-03-22T00:00:00.000Z",
-        "path":  "images/L\u0027africaine aux yeux verts.jpg",
-        "collection":  "Decouverts",
-        "filename":  "L\u0027africaine aux yeux verts.jpg",
-        "title":  ""
-    },
-    {
-        "artist":  "Patrick RAPPENEAU",
-        "creationDate":  "2025-03-22T00:00:00.000Z",
-        "path":  "images/L\u0027asiatique.jpg",
-        "collection":  "Decouverts",
-        "filename":  "L\u0027asiatique.jpg",
-        "title":  ""
-    },
-    {
-        "artist":  "Patrick RAPPENEAU",
-        "creationDate":  "2025-03-22T00:00:00.000Z",
-        "path":  "images/L\u0027irlandaise.jpg",
-        "collection":  "Decouverts",
-        "filename":  "L\u0027irlandaise.jpg",
-        "title":  ""
-    },
-    {
-        "artist":  "Patrick RAPPENEAU",
-        "creationDate":  "2025-03-22T00:00:00.000Z",
-        "path":  "images/L\u0027oeil du cyclone.jpg",
-        "collection":  "Decouverts",
-        "filename":  "L\u0027oeil du cyclone.jpg",
-        "title":  ""
-    },
-    {
-        "artist":  "Patrick RAPPENEAU",
-        "creationDate":  "2025-03-22T00:00:00.000Z",
-        "path":  "images/L\u0027oiselleuse.jpg",
-        "collection":  "Decouverts",
-        "filename":  "L\u0027oiselleuse.jpg",
         "title":  ""
     },
     {
@@ -690,6 +642,30 @@
     {
         "artist":  "Patrick RAPPENEAU",
         "creationDate":  "2025-03-22T00:00:00.000Z",
+        "path":  "images/L\u0027afgan.jpg",
+        "collection":  "Decouverts",
+        "filename":  "L\u0027afgan.jpg",
+        "title":  ""
+    },
+    {
+        "artist":  "Patrick RAPPENEAU",
+        "creationDate":  "2025-03-22T00:00:00.000Z",
+        "path":  "images/L\u0027africaine aux yeux verts.jpg",
+        "collection":  "Decouverts",
+        "filename":  "L\u0027africaine aux yeux verts.jpg",
+        "title":  ""
+    },
+    {
+        "artist":  "Patrick RAPPENEAU",
+        "creationDate":  "2025-03-22T00:00:00.000Z",
+        "path":  "images/L\u0027asiatique.jpg",
+        "collection":  "Decouverts",
+        "filename":  "L\u0027asiatique.jpg",
+        "title":  ""
+    },
+    {
+        "artist":  "Patrick RAPPENEAU",
+        "creationDate":  "2025-03-22T00:00:00.000Z",
         "path":  "images/Le choix dans la date.jpg",
         "collection":  "Decouverts",
         "filename":  "Le choix dans la date.jpg",
@@ -738,17 +714,17 @@
     {
         "artist":  "Patrick RAPPENEAU",
         "creationDate":  "2025-03-22T00:00:00.000Z",
-        "path":  "images/Les doors.jpg",
+        "path":  "images/Légumes de la peur.jpg",
         "collection":  "Decouverts",
-        "filename":  "Les doors.jpg",
+        "filename":  "Légumes de la peur.jpg",
         "title":  ""
     },
     {
         "artist":  "Patrick RAPPENEAU",
         "creationDate":  "2025-03-22T00:00:00.000Z",
-        "path":  "images/Levres gourmandes.jpg",
+        "path":  "images/Les doors.jpg",
         "collection":  "Decouverts",
-        "filename":  "Levres gourmandes.jpg",
+        "filename":  "Les doors.jpg",
         "title":  ""
     },
     {
@@ -762,6 +738,14 @@
     {
         "artist":  "Patrick RAPPENEAU",
         "creationDate":  "2025-03-22T00:00:00.000Z",
+        "path":  "images/Levres gourmandes.jpg",
+        "collection":  "Decouverts",
+        "filename":  "Levres gourmandes.jpg",
+        "title":  ""
+    },
+    {
+        "artist":  "Patrick RAPPENEAU",
+        "creationDate":  "2025-03-22T00:00:00.000Z",
         "path":  "images/Lion électrique.jpg",
         "collection":  "Animaux",
         "filename":  "Lion électrique.jpg",
@@ -770,9 +754,25 @@
     {
         "artist":  "Patrick RAPPENEAU",
         "creationDate":  "2025-03-22T00:00:00.000Z",
-        "path":  "images/Légumes de la peur.jpg",
+        "path":  "images/L\u0027irlandaise.jpg",
         "collection":  "Decouverts",
-        "filename":  "Légumes de la peur.jpg",
+        "filename":  "L\u0027irlandaise.jpg",
+        "title":  ""
+    },
+    {
+        "artist":  "Patrick RAPPENEAU",
+        "creationDate":  "2025-03-22T00:00:00.000Z",
+        "path":  "images/L\u0027oeil du cyclone.jpg",
+        "collection":  "Decouverts",
+        "filename":  "L\u0027oeil du cyclone.jpg",
+        "title":  ""
+    },
+    {
+        "artist":  "Patrick RAPPENEAU",
+        "creationDate":  "2025-03-22T00:00:00.000Z",
+        "path":  "images/L\u0027oiselleuse.jpg",
+        "collection":  "Decouverts",
+        "filename":  "L\u0027oiselleuse.jpg",
         "title":  ""
     },
     {
@@ -826,17 +826,17 @@
     {
         "artist":  "Patrick RAPPENEAU",
         "creationDate":  "2025-03-22T00:00:00.000Z",
-        "path":  "images/Nature morte au citron vert.jpg",
+        "path":  "images/Nature morte à la tomate.jpg",
         "collection":  "Nature morte",
-        "filename":  "Nature morte au citron vert.jpg",
+        "filename":  "Nature morte à la tomate.jpg",
         "title":  ""
     },
     {
         "artist":  "Patrick RAPPENEAU",
         "creationDate":  "2025-03-22T00:00:00.000Z",
-        "path":  "images/Nature morte à la tomate.jpg",
+        "path":  "images/Nature morte au citron vert.jpg",
         "collection":  "Nature morte",
-        "filename":  "Nature morte à la tomate.jpg",
+        "filename":  "Nature morte au citron vert.jpg",
         "title":  ""
     },
     {
@@ -1138,9 +1138,9 @@
     {
         "artist":  "Patrick RAPPENEAU",
         "creationDate":  "2025-03-22T00:00:00.000Z",
-        "path":  "images/TEST.jpg",
+        "path":  "images/Test2.jpg",
         "collection":  "Decouverts",
-        "filename":  "TEST.jpg",
+        "filename":  "Test2.jpg",
         "title":  ""
     },
     {
@@ -1154,17 +1154,17 @@
     {
         "artist":  "Patrick RAPPENEAU",
         "creationDate":  "2025-03-22T00:00:00.000Z",
-        "path":  "images/Un long moment de solitude.jpg",
+        "path":  "images/Un éléphant sur une branche ca n\u0027existe pas.jpg",
         "collection":  "Decouverts",
-        "filename":  "Un long moment de solitude.jpg",
+        "filename":  "Un éléphant sur une branche ca n\u0027existe pas.jpg",
         "title":  ""
     },
     {
         "artist":  "Patrick RAPPENEAU",
         "creationDate":  "2025-03-22T00:00:00.000Z",
-        "path":  "images/Un éléphant sur une branche ca n\u0027existe pas.jpg",
+        "path":  "images/Un long moment de solitude.jpg",
         "collection":  "Decouverts",
-        "filename":  "Un éléphant sur une branche ca n\u0027existe pas.jpg",
+        "filename":  "Un long moment de solitude.jpg",
         "title":  ""
     },
     {
