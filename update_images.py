@@ -2,8 +2,12 @@ import json
 import os
 from datetime import datetime
 
-# List of all jpg files
-files = [
+# Scan all jpg files dynamically from images folder
+images_folder = 'images'
+files = sorted([f for f in os.listdir(images_folder) if f.lower().endswith('.jpg')])
+
+# Old static list (kept for reference, but not used)
+old_files = [
 "3 loups a l'eclipse.jpg",
 "africaner.jpg",
 "all you need is love 55x46  7.4.2025.jpg",
